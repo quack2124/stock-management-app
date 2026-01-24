@@ -23,7 +23,7 @@ class SupplierFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val notificationsViewModel =
-            ViewModelProvider(this).get(TranscationViewModel::class.java)
+            ViewModelProvider(this).get(SupplierViewModel::class.java)
 
         _binding = FragmentSupplierBinding.inflate(inflater, container, false)
         val root: View = binding.root

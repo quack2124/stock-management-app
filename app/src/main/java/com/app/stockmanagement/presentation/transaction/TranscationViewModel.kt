@@ -1,4 +1,4 @@
-package com.app.stockmanagement.presentation.supplier
+package com.app.stockmanagement.presentation.transaction
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

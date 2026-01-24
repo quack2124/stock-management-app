@@ -1,4 +1,4 @@
-package com.app.stockmanagement.presentation.supplier
+package com.app.stockmanagement.presentation.transaction
 
 import android.os.Bundle
 import android.view.LayoutInflater
