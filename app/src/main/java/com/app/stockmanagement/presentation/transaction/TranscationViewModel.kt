@@ -1,10 +1,10 @@
-package com.app.stockmanagement.presentation.notifications
+package com.app.stockmanagement.presentation.supplier
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class NotificationsViewModel : ViewModel() {
+class TranscationViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is notifications Fragment"
