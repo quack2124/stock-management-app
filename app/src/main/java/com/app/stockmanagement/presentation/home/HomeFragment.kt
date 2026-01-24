@@ -1,4 +1,4 @@
-package com.app.stockmanagement.ui.home
+package com.app.stockmanagement.presentation.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
