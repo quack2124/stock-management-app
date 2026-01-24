@@ -25,7 +25,7 @@
 
     <fragment
         android:id="@+id/navigation_transaction"
-        android:name="com.app.stockmanagement.presentation.supplier.TransactionFragment"
+        android:name="com.app.stockmanagement.presentation.transaction.TransactionFragment"
         android:label="@string/title_transaction"
         tools:layout="@layout/fragment_transaction" />
 </navigation>
