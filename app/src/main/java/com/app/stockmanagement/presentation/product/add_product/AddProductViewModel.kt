@@ -2,9 +2,9 @@ package com.app.stockmanagement.presentation.product.add_product
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.app.stockmanagement.data.repository.ProductRepository
-import com.app.stockmanagement.data.repository.SupplierRepository
 import com.app.stockmanagement.domain.model.Product
+import com.app.stockmanagement.domain.repository.ProductRepository
+import com.app.stockmanagement.domain.repository.SupplierRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -36,7 +36,4 @@ class AddProductViewModel @Inject constructor(
         }
     }
 
-    fun getSuppliers() {
-
-    }
 }

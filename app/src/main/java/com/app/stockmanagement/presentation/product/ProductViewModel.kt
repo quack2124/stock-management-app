@@ -3,7 +3,7 @@ package com.app.stockmanagement.presentation.product
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.app.stockmanagement.data.mapper.toDomain
-import com.app.stockmanagement.data.repository.ProductRepository
+import com.app.stockmanagement.domain.repository.ProductRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
