@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:animateLayoutChanges="true"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+
+        <TextView
+            android:id="@+id/productName"
+            style="@style/TextAppearance.Material3.TitleLarge"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@+id/productPrice"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Product Name" />
+
+        <TextView
+            android:id="@+id/productCategory"
+            style="@style/TextAppearance.Material3.BodyLarge"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            app:layout_constraintEnd_toStartOf="@+id/productStock"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/productName"
+            tools:text="Category" />
+
+        <TextView
+            android:id="@+id/productPrice"
+            style="@style/TextAppearance.Material3.TitleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="$100.00" />
+
+        <TextView
+            android:id="@+id/productStock"
+            style="@style/TextAppearance.Material3.BodyLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/productPrice"
+            tools:text="Stock: 50" />
+
+
+        <TextView
+            android:id="@+id/productDescription"
+            style="@style/TextAppearance.Material3.BodyLarge"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/productStock"
+            tools:text="Detailed description of the product goes here..."
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/productBarcode"
+            style="@style/TextAppearance.Material3.BodyLarge"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:visibility="gone"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/productDescription"
+            tools:text="Barcode: 123456789"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/productSupplier"
+            style="@style/TextAppearance.Material3.BodyLarge"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:visibility="gone"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/productBarcode"
+            tools:text="Barcode: 123456789"
+            tools:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/expandIcon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_arrow_down_24"
+            android:layout_marginTop="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/productSupplier"
+            app:tint="?attr/colorOnSurfaceVariant" />
+
+        <ImageView
+            android:id="@+id/editIcon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="15dp"
+            android:src="@drawable/ic_edit_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/productSupplier"
+            app:tint="?attr/colorOnSurfaceVariant" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

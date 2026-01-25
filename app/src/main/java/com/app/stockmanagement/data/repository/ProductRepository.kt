@@ -8,7 +8,7 @@ class ProductRepository @Inject constructor(
     private val productDao: ProductDao
 ) {
 
-    fun getAllProducts() = productDao.getAllProducts()
+    fun getAllProductsWithSupplier() = productDao.getAllProductsWithSupplier()
 
     suspend fun addProduct(product: Product) = productDao.addProduct(product)
 }
