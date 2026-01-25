@@ -10,5 +10,7 @@ class ProductRepository @Inject constructor(
 
     fun getAllProductsWithSupplier() = productDao.getAllProductsWithSupplier()
 
+    fun searchForProductsByName(name: String) = productDao.searchForProductsByName(name)
+
     suspend fun addProduct(product: Product) = productDao.addProduct(product)
 }

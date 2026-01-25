@@ -8,5 +8,6 @@
     <string name="username">username</string>
     <string name="password">password</string>
     <string name="log_in">Log in</string>
+    <string name="search">Search</string>
 
 </resources>

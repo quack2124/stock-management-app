@@ -21,4 +21,8 @@ interface ProductDao {
     @Transaction
     @Query("SELECT * FROM products")
     fun getAllProductsWithSupplier(): Flow<List<ProductWithSupplierEntity>>
+
+    @Transaction
+    @Query("SELECT * FROM products WHERE name LIKE '%' || :name || '%'")
+    fun searchForProductsByName(name: String): Flow<List<ProductWithSupplierEntity>>
 }

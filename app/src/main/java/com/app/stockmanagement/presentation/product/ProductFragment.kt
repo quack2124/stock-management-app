@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.stockmanagement.R
 import com.app.stockmanagement.databinding.FragmentProductBinding
+import com.app.stockmanagement.util.Constants.SEARCH_QUERY
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -25,6 +26,7 @@ class ProductFragment : Fragment() {
     private val productAdapter = ProductAdapter(emptyList())
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        observeSearch()
 
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -41,7 +43,6 @@ class ProductFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-
         _binding = FragmentProductBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
@@ -57,5 +58,13 @@ class ProductFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun observeSearch() {
+        findNavController().currentBackStackEntry?.savedStateHandle
+            ?.getLiveData<String>(SEARCH_QUERY)
+            ?.observe(viewLifecycleOwner) { query ->
+                viewModel.search(query)
+            }
     }
 }

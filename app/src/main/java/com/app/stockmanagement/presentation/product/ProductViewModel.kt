@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ProductViewModel @Inject constructor(
-    val productRepository: ProductRepository
+    private val productRepository: ProductRepository
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(ProductUIState())
@@ -29,6 +29,21 @@ class ProductViewModel @Inject constructor(
                 _uiState.value =
                     _uiState.value.copy(products = it.map { entity -> entity.toDomain() })
             }
+        }
+    }
+
+    fun search(name: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            if (name.isEmpty()) {
+                getAllProducts()
+            } else {
+                productRepository.searchForProductsByName(name).collect {
+                    _uiState.value = _uiState.value.copy(
+                        products = it.map { entity -> entity.toDomain() },
+                    )
+                }
+            }
+
         }
     }
 
