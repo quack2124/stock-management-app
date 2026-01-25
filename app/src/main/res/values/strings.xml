@@ -4,4 +4,9 @@
     <string name="title_product">Products</string>
     <string name="title_supplier">Suppliers</string>
     <string name="title_transaction">Transactions</string>
+    <string name="invalid_credentials">Invalid credentials</string>
+    <string name="username">username</string>
+    <string name="password">password</string>
+    <string name="log_in">Log in</string>
+
 </resources>

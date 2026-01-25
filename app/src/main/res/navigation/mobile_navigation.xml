@@ -6,6 +6,11 @@
     app:startDestination="@+id/navigation_dashboard">
 
     <fragment
+        android:id="@+id/navigation_login"
+        android:name="com.app.stockmanagement.presentation.login.LoginFragment"
+        android:label="@string/title_product"
+        tools:layout="@layout/fragment_login" />
+    <fragment
         android:id="@+id/navigation_dashboard"
         android:name="com.app.stockmanagement.presentation.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
