@@ -9,7 +9,7 @@ data class Transaction(
     val id: Long,
     val date: Long,
     val type: Type,
-    val productId: Int,
+    val productId: Long,
     val quantity: Int,
     val notes: String?
 )
