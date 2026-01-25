@@ -33,4 +33,9 @@
         android:name="com.app.stockmanagement.presentation.transaction.TransactionFragment"
         android:label="@string/title_transaction"
         tools:layout="@layout/fragment_transaction" />
+    <dialog
+        android:id="@+id/navigation_add_product"
+        android:name="com.app.stockmanagement.presentation.product.add_product.AddProductFragment"
+        android:label="New Entry" />
+
 </navigation>

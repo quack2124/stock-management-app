@@ -3,6 +3,7 @@ package com.app.stockmanagement.di
 import android.content.Context
 import androidx.room.Room
 import com.app.stockmanagement.data.local.AppDatabase
+import com.app.stockmanagement.data.local.dao.ProductDao
 import com.app.stockmanagement.util.Constants
 import dagger.Module
 import dagger.Provides
@@ -19,4 +20,8 @@ object DatabaseModule {
     @Singleton
     fun provideDatabase(@ApplicationContext context: Context): AppDatabase =
         Room.databaseBuilder(context, AppDatabase::class.java, Constants.DB_NAME).build()
+
+
+    @Provides
+    fun provideProductDao(db: AppDatabase): ProductDao = db.productDao()
 }

@@ -1,13 +1,24 @@
 package com.app.stockmanagement.presentation.product
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.app.stockmanagement.data.repository.ProductRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ProductViewModel : ViewModel() {
+@HiltViewModel
+class ProductViewModel @Inject constructor(
+    val productRepository: ProductRepository
+) : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
+    fun getAllProducts() {
+        viewModelScope.launch {
+            productRepository.getAllProducts().collect {
+                it
+            }
+        }
     }
-    val text: LiveData<String> = _text
+
+
 }
