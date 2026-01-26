@@ -8,4 +8,5 @@ class SupplierRepositoryImpl @Inject constructor(
     private val supplierDao: SupplierDao
 ) : SupplierRepository {
     override fun getAllSuppliers() = supplierDao.getAllSuppliers();
+    override fun searchForSupplierByName(name: String) = supplierDao.searchForSupplierByName(name)
 }

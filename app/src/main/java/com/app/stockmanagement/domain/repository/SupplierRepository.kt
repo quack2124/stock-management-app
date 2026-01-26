@@ -5,4 +5,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface SupplierRepository {
     fun getAllSuppliers(): Flow<List<SupplierEntity>>
+    fun searchForSupplierByName(name: String): Flow<List<SupplierEntity>>
 }

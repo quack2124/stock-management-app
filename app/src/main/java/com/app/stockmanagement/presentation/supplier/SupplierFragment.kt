@@ -11,8 +11,10 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.app.stockmanagement.databinding.FragmentSupplierBinding
+import com.app.stockmanagement.util.Constants.SEARCH_QUERY
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -26,7 +28,7 @@ class SupplierFragment : Fragment() {
     private var supplierAdapter = SupplierAdapter(emptyList())
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        observeSearch()
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
@@ -62,12 +64,19 @@ class SupplierFragment : Fragment() {
             adapter = supplierAdapter
         }
 
-
         return root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun observeSearch() {
+        findNavController().currentBackStackEntry?.savedStateHandle
+            ?.getLiveData<String>(SEARCH_QUERY)
+            ?.observe(viewLifecycleOwner) { query ->
+                viewModel.search(query)
+            }
     }
 }

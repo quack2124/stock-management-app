@@ -40,4 +40,19 @@ class SupplierViewModel @Inject constructor(private val repository: SupplierRepo
             }
         }
     }
+
+    fun search(name: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            if (name.isEmpty()) {
+                getAllSuppliers()
+            } else {
+                repository.searchForSupplierByName(name).collect {
+                    _uiState.value = _uiState.value.copy(
+                        suppliers = it.map { entity -> entity.toDomain() },
+                    )
+                }
+            }
+
+        }
+    }
 }

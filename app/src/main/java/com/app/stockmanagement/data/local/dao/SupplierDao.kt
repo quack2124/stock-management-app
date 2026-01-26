@@ -11,4 +11,7 @@ interface SupplierDao {
     @Query("SELECT * FROM suppliers")
     fun getAllSuppliers(): Flow<List<SupplierEntity>>
 
+    @Query("SELECT * FROM suppliers WHERE name LIKE '%' || :name || '%'")
+    fun searchForSupplierByName(name: String): Flow<List<SupplierEntity>>
+
 }

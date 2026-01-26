@@ -52,7 +52,8 @@ class MainActivity : AppCompatActivity() {
             navController.navigate(R.id.navigation_login)
         }
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            showOptionsMenu = (destination.id == R.id.navigation_product)
+            showOptionsMenu =
+                (destination.id == R.id.navigation_product || destination.id == R.id.navigation_supplier)
             invalidateOptionsMenu()
             if (destination.id == R.id.navigation_login) {
                 navView.visibility = android.view.View.GONE
