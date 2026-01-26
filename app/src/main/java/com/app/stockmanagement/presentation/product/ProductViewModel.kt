@@ -29,9 +29,11 @@ class ProductViewModel @Inject constructor(
 
     private fun getAllProducts() {
         viewModelScope.launch(Dispatchers.IO) {
+            _uiState.value = _uiState.value.copy(isLoading = true)
             getAllProductsUseCase(object : UseCaseHandler<List<ProductWithSupplierEntity>> {
                 override fun onSuccess(result: List<ProductWithSupplierEntity>) {
                     _uiState.value = _uiState.value.copy(
+                        isLoading = false,
                         products = result.map { it.toDomain() })
                 }
 
