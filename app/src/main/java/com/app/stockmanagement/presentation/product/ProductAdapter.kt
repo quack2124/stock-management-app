@@ -52,7 +52,7 @@ class ProductAdapter(private var products: List<ProductWithSupplier>) :
                     binding.root.findNavController().navigate(action)
                 }
 
-                expandIcon.setOnClickListener {
+                binding.root.setOnClickListener {
                     if (isExpanded) {
                         expandedPositions.remove(position)
                     } else {
