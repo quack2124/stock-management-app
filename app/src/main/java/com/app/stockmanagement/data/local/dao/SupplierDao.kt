@@ -2,13 +2,13 @@ package com.app.stockmanagement.data.local.dao
 
 import androidx.room.Dao
 import androidx.room.Query
-import com.app.stockmanagement.data.local.entity.Supplier
+import com.app.stockmanagement.data.local.entity.SupplierEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface SupplierDao {
 
     @Query("SELECT * FROM suppliers")
-    fun getAllSuppliers(): Flow<List<Supplier>>
+    fun getAllSuppliers(): Flow<List<SupplierEntity>>
 
 }

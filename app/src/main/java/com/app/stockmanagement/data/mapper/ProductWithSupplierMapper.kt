@@ -12,5 +12,5 @@ fun ProductWithSupplierEntity.toDomain(): ProductWithSupplier = ProductWithSuppl
     barcode = product.barcode,
     currentStockLevel = product.currentStockLevel,
     minimumStockLevel = product.minimumStockLevel,
-    supplierName = supplier.name
+    supplierName = supplierEntity.name
 )

@@ -2,6 +2,7 @@ package com.app.stockmanagement.presentation.product.add_product
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.app.stockmanagement.data.mapper.toDomain
 import com.app.stockmanagement.domain.model.Product
 import com.app.stockmanagement.domain.repository.ProductRepository
 import com.app.stockmanagement.domain.repository.SupplierRepository
@@ -23,8 +24,9 @@ class AddProductViewModel @Inject constructor(
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            supplierRepository.getAllSuppliers().collect {
-                _uiState.value = _uiState.value.copy(suppliers = it)
+            supplierRepository.getAllSuppliers().collect { suppliers ->
+                _uiState.value =
+                    _uiState.value.copy(suppliers = suppliers.map { supplier -> supplier.toDomain() })
             }
         }
     }

@@ -12,9 +12,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.app.stockmanagement.R
-import com.app.stockmanagement.data.local.entity.Supplier
 import com.app.stockmanagement.databinding.FragmentAddProductBinding
 import com.app.stockmanagement.domain.model.Product
+import com.app.stockmanagement.domain.model.Supplier
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 

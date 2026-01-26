@@ -10,5 +10,5 @@ data class ProductWithSupplierEntity(
         parentColumn = "supplierId", // The foreign key column in Product
         entityColumn = "id"          // The primary key column in Category
     )
-    val supplier: Supplier
+    val supplierEntity: SupplierEntity
 )
