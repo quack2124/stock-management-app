@@ -5,6 +5,7 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.app.stockmanagement.data.local.dao.ProductDao
 import com.app.stockmanagement.data.local.dao.SupplierDao
+import com.app.stockmanagement.data.local.dao.TransactionDao
 import com.app.stockmanagement.data.local.entity.ProductEntity
 import com.app.stockmanagement.data.local.entity.SupplierEntity
 import com.app.stockmanagement.data.local.entity.TransactionEntity
@@ -18,4 +19,5 @@ import com.app.stockmanagement.util.DateConverters
 abstract class AppDatabase : RoomDatabase() {
     abstract fun productDao(): ProductDao
     abstract fun supplierDao(): SupplierDao
+    abstract fun transactionDao(): TransactionDao
 }

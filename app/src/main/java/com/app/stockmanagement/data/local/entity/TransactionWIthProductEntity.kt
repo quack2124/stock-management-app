@@ -5,7 +5,7 @@ import androidx.room.Relation
 
 data class TransactionWIthProductEntity(
     @Embedded
-    val transaction: TransactionEntity,
+    val transactionEntity: TransactionEntity,
     @Relation(
         parentColumn = "productId",
         entityColumn = "id"
