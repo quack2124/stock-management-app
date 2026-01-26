@@ -4,5 +4,7 @@ import com.app.stockmanagement.domain.model.TransactionWithProduct
 
 data class TransactionUiState(
     val isLoading: Boolean = false,
-    val transactions: List<TransactionWithProduct> = emptyList()
+    val transactions: List<TransactionWithProduct> = emptyList(),
+    val cachedTransactions: List<TransactionWithProduct> = emptyList(),
+    val checkedElement: Int = 0
 )

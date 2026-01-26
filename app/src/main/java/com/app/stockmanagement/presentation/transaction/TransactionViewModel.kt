@@ -2,6 +2,7 @@ package com.app.stockmanagement.presentation.transaction
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.app.stockmanagement.data.local.entity.Type
 import com.app.stockmanagement.data.mapper.toDomain
 import com.app.stockmanagement.domain.repository.TransactionRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -24,9 +25,42 @@ class TransactionViewModel @Inject constructor(
             _uiState.value = _uiState.value.copy(isLoading = true)
             repository.getAllTransactionsWithProduct().collect { transactions ->
                 _uiState.value = _uiState.value.copy(
+                    cachedTransactions = transactions.map { it.toDomain() },
                     isLoading = false,
-                    transactions = transactions.map { it.toDomain() })
+                    transactions = transactions.map { it.toDomain() }
+
+                )
             }
         }
     }
+
+    fun filterResults(selectedType: Type?, viewId: Int) {
+        when (selectedType) {
+            Type.RESTOCK -> {
+                val filtered = _uiState.value.cachedTransactions.filter { it.type == Type.RESTOCK }
+                _uiState.value = _uiState.value.copy(
+                    transactions = filtered,
+                    checkedElement = viewId
+                )
+            }
+
+            Type.SALE -> {
+                val filtered = _uiState.value.cachedTransactions.filter { it.type == Type.SALE }
+                _uiState.value = _uiState.value.copy(
+                    transactions = filtered,
+                    checkedElement = viewId
+                )
+            }
+
+            null -> {
+                val filtered = _uiState.value.cachedTransactions
+                _uiState.value = _uiState.value.copy(
+                    transactions = filtered,
+                    checkedElement = viewId
+                )
+            }
+        }
+
+    }
+
 }
