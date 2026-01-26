@@ -3,12 +3,12 @@ package com.app.stockmanagement.data.local.entity
 import androidx.room.Embedded
 import androidx.room.Relation
 
-data class ProductWithSupplierEntity(
+data class TransactionWIthProductEntity(
     @Embedded
-    val product: ProductEntity,
+    val transaction: TransactionEntity,
     @Relation(
-        parentColumn = "supplierId",
+        parentColumn = "productId",
         entityColumn = "id"
     )
-    val supplierEntity: SupplierEntity
+    val productEntity: ProductEntity
 )

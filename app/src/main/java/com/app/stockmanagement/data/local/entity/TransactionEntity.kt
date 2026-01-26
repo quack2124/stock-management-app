@@ -2,12 +2,13 @@ package com.app.stockmanagement.data.local.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.util.Date
 
 @Entity(tableName = "transactions")
-data class Transaction(
+data class TransactionEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Long,
-    val date: Long,
+    val date: Date,
     val type: Type,
     val productId: Long,
     val quantity: Int,
