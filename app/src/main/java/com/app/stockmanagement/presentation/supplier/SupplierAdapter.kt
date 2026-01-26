@@ -57,10 +57,10 @@ class SupplierAdapter(private var suppliers: List<Supplier>) :
                 }
 
                 name.text = supplier.name
-                contactPerson.text = supplier.contactPerson
-                phone.text = supplier.phone
-                email.text = supplier.email
-                address.text = supplier.address
+                contactPerson.text = "Contact person: ${supplier.contactPerson}"
+                phone.text = "Phone: ${supplier.phone}"
+                email.text = "Email: ${supplier.email}"
+                address.text = "Address: ${supplier.address}"
             }
         }
     }
