@@ -2,8 +2,11 @@ package com.app.stockmanagement.presentation.product
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.app.stockmanagement.data.local.entity.ProductWithSupplierEntity
 import com.app.stockmanagement.data.mapper.toDomain
 import com.app.stockmanagement.domain.repository.ProductRepository
+import com.app.stockmanagement.domain.usecase.GetAllProductsUseCase
+import com.app.stockmanagement.util.UseCaseHandler
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,6 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ProductViewModel @Inject constructor(
+    private val getAllProductsUseCase: GetAllProductsUseCase,
     private val productRepository: ProductRepository
 ) : ViewModel() {
 
@@ -25,10 +29,16 @@ class ProductViewModel @Inject constructor(
 
     private fun getAllProducts() {
         viewModelScope.launch(Dispatchers.IO) {
-            productRepository.getAllProductsWithSupplier().collect {
-                _uiState.value =
-                    _uiState.value.copy(products = it.map { entity -> entity.toDomain() })
-            }
+            getAllProductsUseCase(object : UseCaseHandler<List<ProductWithSupplierEntity>> {
+                override fun onSuccess(result: List<ProductWithSupplierEntity>) {
+                    _uiState.value = _uiState.value.copy(
+                        products = result.map { it.toDomain() })
+                }
+
+                override fun onFailure() {
+
+                }
+            })
         }
     }
 

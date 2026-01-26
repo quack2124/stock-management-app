@@ -1,5 +1,6 @@
 package com.app.stockmanagement.presentation.transaction.transaction_management
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +17,7 @@ import com.app.stockmanagement.data.local.entity.Type
 import com.app.stockmanagement.databinding.FragmentTransactionManagementBinding
 import com.app.stockmanagement.domain.model.ProductWithSupplier
 import com.app.stockmanagement.domain.model.TransactionWithProduct
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.util.Date
@@ -38,16 +40,36 @@ class TransactionManagementFragment : DialogFragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.uiState.collect { uiState ->
-                    binding.progressBarTransactionNew.isVisible = uiState.isLoading
-                    val adapter = ArrayAdapter(
-                        requireContext(),
-                        android.R.layout.simple_list_item_1,
-                        uiState.products
-                    )
-                    binding.productAutoComplete.setAdapter(adapter)
+                launch {
+                    viewModel.uiState.collect { uiState ->
+                        binding.progressBarTransactionNew.isVisible = uiState.isLoading
+                        val adapter = ArrayAdapter(
+                            requireContext(),
+                            android.R.layout.simple_list_item_1,
+                            uiState.products
+                        )
+                        binding.productAutoComplete.setAdapter(adapter)
+                    }
                 }
+
+                launch {
+                    viewModel.eventFlow.collect { event ->
+                        when (event) {
+                            is TransactionManagementUiEffect.Success -> findNavController().popBackStack()
+                            is TransactionManagementUiEffect.ShowError -> Snackbar.make(
+                                binding.root,
+                                event.message,
+                                Snackbar.LENGTH_LONG
+                            )
+                                .setBackgroundTint(Color.RED)
+                                .show()
+                        }
+                    }
+                }
+
             }
+
+
         }
         binding.topAppBar.setOnMenuItemClickListener {
             viewModel.addTransaction(
