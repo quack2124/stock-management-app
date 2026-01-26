@@ -3,6 +3,7 @@ package com.app.stockmanagement.presentation.supplier
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.app.stockmanagement.R
 import com.app.stockmanagement.databinding.ItemSupplierBinding
@@ -41,10 +42,10 @@ class SupplierAdapter(private var suppliers: List<Supplier>) :
                 phone.visibility = if (isExpanded) View.VISIBLE else View.GONE
                 email.visibility = if (isExpanded) View.VISIBLE else View.GONE
                 address.visibility = if (isExpanded) View.VISIBLE else View.GONE
-//                editIcon.setOnClickListener {
-//                    val action = ProductFragmentDirections.actionProductToEdit(product)
-//                    binding.root.findNavController().navigate(action)
-//                }
+                editIcon.setOnClickListener {
+                    val action = SupplierFragmentDirections.actionSupplierToEdit(supplier)
+                    binding.root.findNavController().navigate(action)
+                }
 
                 binding.root.setOnClickListener {
                     if (isExpanded) {

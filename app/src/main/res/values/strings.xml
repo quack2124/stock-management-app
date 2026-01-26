@@ -10,4 +10,10 @@
     <string name="log_in">Log in</string>
     <string name="search">Search</string>
     <string name="edit_product">Edit product</string>
+    <string name="edit_supplier">Edit supplier</string>
+    <string name="address">address</string>
+    <string name="email">email</string>
+    <string name="phone">phone</string>
+    <string name="contact_person">contact person</string>
+    <string name="name">name</string>
 </resources>

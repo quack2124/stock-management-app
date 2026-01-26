@@ -30,7 +30,12 @@
         android:id="@+id/navigation_supplier"
         android:name="com.app.stockmanagement.presentation.supplier.SupplierFragment"
         android:label="@string/title_supplier"
-        tools:layout="@layout/fragment_supplier" />
+        tools:layout="@layout/fragment_supplier">
+        <action
+            android:id="@+id/action_supplier_to_edit"
+            app:destination="@id/navigation_edit_supplier" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_transaction"
@@ -49,6 +54,15 @@
         <argument
             android:name="currentProduct"
             app:argType="com.app.stockmanagement.domain.model.ProductWithSupplier" />
+    </dialog>
+
+    <dialog
+        android:id="@+id/navigation_edit_supplier"
+        android:name="com.app.stockmanagement.presentation.supplier.edit_supplier.EditSupplierFragment"
+        android:label="a">
+        <argument
+            android:name="currentSupplier"
+            app:argType="com.app.stockmanagement.domain.model.Supplier" />
     </dialog>
 
 

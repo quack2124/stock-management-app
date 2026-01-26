@@ -1,5 +1,9 @@
 package com.app.stockmanagement.domain.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Supplier(
     val id: Long,
     val name: String,
@@ -7,4 +11,4 @@ data class Supplier(
     val phone: String,
     val email: String,
     val address: String
-)
+) : Parcelable
