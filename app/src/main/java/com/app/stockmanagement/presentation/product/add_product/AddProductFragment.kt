@@ -46,7 +46,7 @@ class AddProductFragment : DialogFragment() {
                                 android.R.layout.simple_list_item_1,
                                 uiState.suppliers.map { it.name }
                             )
-                            binding.supplierAutoComplete.setAdapter(adapter)
+                            binding.productForm.supplierAutoComplete.setAdapter(adapter)
 
                         }
                     }
@@ -70,17 +70,17 @@ class AddProductFragment : DialogFragment() {
         val categories = resources.getStringArray(R.array.categories)
         val adapter =
             ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, categories)
-        binding.categoryAutoComplete.setAdapter(adapter)
+        binding.productForm.categoryAutoComplete.setAdapter(adapter)
         binding.topAppBar.setOnMenuItemClickListener {
             val product = Product(
-                name = binding.name.text.toString(),
-                description = binding.description.text.toString(),
-                price = binding.price.text.toString().toDouble(),
-                category = binding.categoryAutoComplete.text.toString(),
-                barcode = binding.barcode.text.toString(),
-                supplierId = suppliers.first { it.name == binding.supplierAutoComplete.text.toString() }.id,
-                currentStockLevel = binding.currentStockLevel.text.toString().toInt(),
-                minimumStockLevel = binding.minStockLevel.text.toString().toInt()
+                name = binding.productForm.name.text.toString(),
+                description = binding.productForm.description.text.toString(),
+                price = binding.productForm.price.text.toString().toDouble(),
+                category = binding.productForm.categoryAutoComplete.text.toString(),
+                barcode = binding.productForm.barcode.text.toString(),
+                supplierId = suppliers.first { it.name == binding.productForm.supplierAutoComplete.text.toString() }.id,
+                currentStockLevel = binding.productForm.currentStockLevel.text.toString().toInt(),
+                minimumStockLevel = binding.productForm.minStockLevel.text.toString().toInt()
 
             )
             viewModel.addNewProduct(product)

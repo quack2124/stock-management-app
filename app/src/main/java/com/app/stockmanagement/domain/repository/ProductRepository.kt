@@ -2,6 +2,7 @@ package com.app.stockmanagement.domain.repository
 
 import com.app.stockmanagement.data.local.entity.ProductWithSupplierEntity
 import com.app.stockmanagement.domain.model.Product
+import com.app.stockmanagement.domain.model.ProductWithSupplier
 import kotlinx.coroutines.flow.Flow
 
 interface ProductRepository {
@@ -11,4 +12,6 @@ interface ProductRepository {
     fun searchForProductsByName(name: String): Flow<List<ProductWithSupplierEntity>>
 
     suspend fun addProduct(product: Product)
+
+    suspend fun updateProduct(product: ProductWithSupplier)
 }

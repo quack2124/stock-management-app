@@ -20,7 +20,11 @@
         android:id="@+id/navigation_product"
         android:name="com.app.stockmanagement.presentation.product.ProductFragment"
         android:label="@string/title_product"
-        tools:layout="@layout/fragment_product" />
+        tools:layout="@layout/fragment_product">
+        <action
+            android:id="@+id/action_product_to_edit"
+            app:destination="@id/navigation_edit_product" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_supplier"
@@ -37,5 +41,15 @@
         android:id="@+id/navigation_add_product"
         android:name="com.app.stockmanagement.presentation.product.add_product.AddProductFragment"
         android:label="New Entry" />
+
+    <dialog
+        android:id="@+id/navigation_edit_product"
+        android:name="com.app.stockmanagement.presentation.product.edit_product.EditProductFragment"
+        android:label="a">
+        <argument
+            android:name="currentProduct"
+            app:argType="com.app.stockmanagement.domain.model.ProductWithSupplier" />
+    </dialog>
+
 
 </navigation>

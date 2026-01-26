@@ -9,4 +9,5 @@ object Constants {
     const val IS_SIGNED_IN_KEY = "isSignedIn"
     const val DB_NAME = "stock-management-db"
     const val SEARCH_QUERY = "search_query"
+    const val ERROR = "An error has occurred please try again"
 }

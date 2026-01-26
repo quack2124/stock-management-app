@@ -3,6 +3,7 @@ package com.app.stockmanagement.presentation.product
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.app.stockmanagement.R
 import com.app.stockmanagement.databinding.ItemProductBinding
@@ -46,6 +47,10 @@ class ProductAdapter(private var products: List<ProductWithSupplier>) :
                 productDescription.visibility = if (isExpanded) View.VISIBLE else View.GONE
                 productBarcode.visibility = if (isExpanded) View.VISIBLE else View.GONE
                 productSupplier.visibility = if (isExpanded) View.VISIBLE else View.GONE
+                editIcon.setOnClickListener {
+                    val action = ProductFragmentDirections.actionProductToEdit(product)
+                    binding.root.findNavController().navigate(action)
+                }
 
                 expandIcon.setOnClickListener {
                     if (isExpanded) {
