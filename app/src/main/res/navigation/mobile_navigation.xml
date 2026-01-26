@@ -65,5 +65,9 @@
             app:argType="com.app.stockmanagement.domain.model.Supplier" />
     </dialog>
 
+    <dialog
+        android:id="@+id/navigation_transaction_management"
+        android:name="com.app.stockmanagement.presentation.transaction.transaction_management.TransactionManagementFragment"
+        android:label="a"></dialog>
 
 </navigation>

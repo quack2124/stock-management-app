@@ -10,7 +10,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.app.stockmanagement.R
 import com.app.stockmanagement.databinding.FragmentTransactionBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -33,7 +35,9 @@ class TransactionFragment : Fragment() {
             layoutManager = LinearLayoutManager(context)
             adapter = transactionAdapter
         }
-
+        binding.floatingActionButton.setOnClickListener {
+            findNavController().navigate(R.id.navigation_transaction_management)
+        }
         return root
     }
 

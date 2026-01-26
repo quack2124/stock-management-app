@@ -11,5 +11,6 @@ fun TransactionWIthProductEntity.toDomain(): TransactionWithProduct = Transactio
     notes = transactionEntity.notes,
     productName = productEntity.name,
     productPrice = productEntity.price,
-    productBarcode = productEntity.barcode
+    productBarcode = productEntity.barcode,
+    productId = transactionEntity.productId
 )

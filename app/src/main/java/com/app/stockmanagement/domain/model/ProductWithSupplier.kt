@@ -16,4 +16,7 @@ data class ProductWithSupplier(
     val minimumStockLevel: Int,
     @Ignore
     val supplierName: String,
-) : Parcelable
+) : Parcelable {
+    override fun toString() = "$name ($currentStockLevel)"
+
+}
