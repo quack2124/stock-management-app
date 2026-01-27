@@ -122,7 +122,7 @@ class TransactionManagementFragment : DialogFragment() {
         _binding = null
     }
 
-    private fun isFormValid(): Boolean {
+    private fun allRequiredFieldsPresent(): Boolean {
         val type = binding.typeAutocomplete.text.toString().trim()
         val products = binding.productAutoComplete.text.toString().trim()
         val quantity = binding.transactionQuantity.text.toString().trim()
@@ -142,7 +142,8 @@ class TransactionManagementFragment : DialogFragment() {
                 null
             }
 
-            topAppBar.menu.findItem(R.id.action_save)?.isEnabled = !isOverStock && isFormValid()
+            topAppBar.menu.findItem(R.id.action_save)?.isEnabled =
+                !isOverStock && allRequiredFieldsPresent()
         }
     }
 

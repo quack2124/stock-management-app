@@ -23,4 +23,11 @@
     <string name="note">Note</string>
     <string name="filter">Filter</string>
     <string name="error_max_quantity">Max quantity for sale is %1$d</string>
+    <string name="description">Description</string>
+    <string name="price">Price</string>
+    <string name="category">Category</string>
+    <string name="supplier">Supplier</string>
+    <string name="barcode">Barcode</string>
+    <string name="current_stock_level">Current stock level</string>
+    <string name="min_stock_level">Min stock level</string>
 </resources>

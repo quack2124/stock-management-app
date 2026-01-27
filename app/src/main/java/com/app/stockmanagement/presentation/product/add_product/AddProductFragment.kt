@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.EditText
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -24,6 +26,8 @@ class AddProductFragment : DialogFragment() {
     private val binding get() = _binding!!
     lateinit var suppliers: List<Supplier>
     private val viewModel: AddProductViewModel by viewModels()
+    private lateinit var formFields: List<EditText>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStyle(
@@ -63,6 +67,21 @@ class AddProductFragment : DialogFragment() {
     ): View {
         _binding = FragmentAddProductBinding.inflate(inflater, container, false)
         val root: View = binding.root
+        binding.topAppBar.menu.findItem(R.id.action_save)?.isEnabled = false
+        formFields = with(binding.productForm) {
+            listOf(
+                name, description, price, categoryAutoComplete,
+                barcode, supplierAutoComplete, currentStockLevel, minStockLevel
+            )
+        }
+        formFields.map { editText ->
+            editText.doAfterTextChanged {
+                if (editText == binding.productForm.currentStockLevel || editText == binding.productForm.minStockLevel) {
+                    validateStockFields()
+                }
+                validateForm()
+            }
+        }
 
         binding.topAppBar.setNavigationOnClickListener {
             findNavController().popBackStack()
@@ -92,5 +111,31 @@ class AddProductFragment : DialogFragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun allRequiredFieldsPresent(): Boolean =
+        with(binding.productForm) {
+            listOf(
+                name, description, price, categoryAutoComplete,
+                barcode, supplierAutoComplete, currentStockLevel, minStockLevel
+            ).all { it.text?.toString()?.trim()?.isNotBlank() == true }
+        }
+
+
+    private fun validateForm() {
+        if (allRequiredFieldsPresent()) binding.topAppBar.menu.findItem(R.id.action_save)?.isEnabled =
+            true
+
+    }
+
+    private fun validateStockFields() = with(binding.productForm) {
+        val currentStockLevelValue = currentStockLevel.text.toString().toIntOrNull() ?: -1
+        val minStockLevelValue = minStockLevel.text.toString().toIntOrNull() ?: -1
+        if (currentStockLevelValue != -1 && currentStockLevelValue < minStockLevelValue) {
+            currentStockLevelLayout.error = "Can't be lower than minimum stock"
+        } else {
+            currentStockLevelLayout.error = null
+
+        }
     }
 }

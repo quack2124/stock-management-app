@@ -32,12 +32,15 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
-        android:hint="desc"
+        android:hint="@string/description"
+        app:counterMaxLength="100"
+        app:counterEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/nameLayout">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/description"
+            android:maxLength="100"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textMultiLine"
@@ -66,7 +69,7 @@
             android:layout_marginStart="50dp"
             android:layout_marginEnd="30dp"
             android:layout_weight="1"
-            android:hint="price"
+            android:hint="@string/price"
             app:layout_constraintTop_toBottomOf="@id/descriptionLayout">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -86,7 +89,7 @@
             android:layout_marginEnd="50dp"
             android:layout_weight="1"
 
-            android:hint="category"
+            android:hint="@string/category"
             app:layout_constraintTop_toBottomOf="@id/priceLayout">
 
             <AutoCompleteTextView
@@ -107,7 +110,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
-        android:hint="supplier"
+        android:hint="@string/supplier"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/linearLayout">
 
@@ -126,12 +129,13 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
-        android:hint="barcode"
+        android:hint="@string/barcode"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/supplierLayout">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/barcode"
+            android:maxLength="13"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number" />
@@ -155,7 +159,7 @@
             android:layout_marginStart="50dp"
             android:layout_marginEnd="10dp"
             android:layout_weight="1"
-            android:hint="current stock level"
+            android:hint="@string/current_stock_level"
             app:layout_constraintTop_toBottomOf="@id/barcodeLayout">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -174,7 +178,7 @@
             android:layout_marginEnd="50dp"
             android:layout_weight="1"
 
-            android:hint="min stock level"
+            android:hint="@string/min_stock_level"
             app:layout_constraintTop_toBottomOf="@id/currentStockLevelLayout">
 
             <com.google.android.material.textfield.TextInputEditText
