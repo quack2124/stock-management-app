@@ -30,4 +30,8 @@ interface ProductDao {
 
     @Update(entity = ProductEntity::class)
     suspend fun updateProduct(product: ProductWithSupplier)
+
+    @Transaction
+    @Query("SELECT * FROM products where currentStockLevel <= :amount")
+    fun getProductsWithLowStock(amount: Int): Flow<List<ProductWithSupplierEntity>>
 }

@@ -1,9 +1,11 @@
 package com.app.stockmanagement.data.repository
 
 import com.app.stockmanagement.data.local.dao.ProductDao
+import com.app.stockmanagement.data.local.entity.ProductWithSupplierEntity
 import com.app.stockmanagement.domain.model.Product
 import com.app.stockmanagement.domain.model.ProductWithSupplier
 import com.app.stockmanagement.domain.repository.ProductRepository
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class ProductRepositoryImpl @Inject constructor(
@@ -13,6 +15,8 @@ class ProductRepositoryImpl @Inject constructor(
     override fun getAllProductsWithSupplier() = productDao.getAllProductsWithSupplier()
 
     override fun searchForProductsByName(name: String) = productDao.searchForProductsByName(name)
+    override fun getProductsWithLowStock(amount: Int): Flow<List<ProductWithSupplierEntity>> =
+        productDao.getProductsWithLowStock(amount)
 
     override suspend fun addProduct(product: Product) = productDao.addProduct(product)
 

@@ -8,6 +8,7 @@ import com.app.stockmanagement.data.local.entity.TransactionEntity
 import com.app.stockmanagement.data.local.entity.TransactionWIthProductEntity
 import com.app.stockmanagement.domain.model.TransactionWithProduct
 import kotlinx.coroutines.flow.Flow
+import java.util.Date
 
 @Dao
 interface TransactionDao {
@@ -15,6 +16,10 @@ interface TransactionDao {
     @Transaction
     @Query("SELECT * FROM transactions")
     fun getAllTransactionsWithProduct(): Flow<List<TransactionWIthProductEntity>>
+
+    @Transaction
+    @Query("SELECT * FROM transactions where date >= :date")
+    fun getAllTransactionsInLastHrs(date: Date): Flow<List<TransactionWIthProductEntity>>
 
     @Insert(entity = TransactionEntity::class)
     suspend fun addTransaction(transaction: TransactionWithProduct)

@@ -11,6 +11,8 @@ interface ProductRepository {
 
     fun searchForProductsByName(name: String): Flow<List<ProductWithSupplierEntity>>
 
+    fun getProductsWithLowStock(amount: Int): Flow<List<ProductWithSupplierEntity>>
+
     suspend fun addProduct(product: Product)
 
     suspend fun updateProduct(product: ProductWithSupplier)

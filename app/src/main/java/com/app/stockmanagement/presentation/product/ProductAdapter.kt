@@ -11,7 +11,7 @@ import com.app.stockmanagement.domain.model.ProductWithSupplier
 
 class ProductAdapter(private var products: List<ProductWithSupplier>) :
     RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
-
+    private var isEditEnabled: Boolean = true
     private val expandedPositions = mutableSetOf<Int>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         val binding = ItemProductBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -43,7 +43,7 @@ class ProductAdapter(private var products: List<ProductWithSupplier>) :
                     R.drawable.ic_arrow_down_24
                 )
 
-                editIcon.visibility = if (isExpanded) View.VISIBLE else View.GONE
+                editIcon.visibility = if (isExpanded && isEditEnabled) View.VISIBLE else View.GONE
                 productDescription.visibility = if (isExpanded) View.VISIBLE else View.GONE
                 productBarcode.visibility = if (isExpanded) View.VISIBLE else View.GONE
                 productSupplier.visibility = if (isExpanded) View.VISIBLE else View.GONE
@@ -67,6 +67,11 @@ class ProductAdapter(private var products: List<ProductWithSupplier>) :
     fun updateData(newList: List<ProductWithSupplier>) {
         products = newList
         expandedPositions.clear()
+        notifyDataSetChanged()
+    }
+
+    fun hideEditBtn() {
+        this.isEditEnabled = false
         notifyDataSetChanged()
     }
 }
