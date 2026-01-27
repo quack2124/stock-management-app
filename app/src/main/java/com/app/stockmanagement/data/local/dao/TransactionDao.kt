@@ -18,7 +18,7 @@ interface TransactionDao {
     fun getAllTransactionsWithProduct(): Flow<List<TransactionWIthProductEntity>>
 
     @Transaction
-    @Query("SELECT * FROM transactions where date >= :date")
+    @Query("SELECT * FROM transactions where date >= :date ORDER BY date DESC")
     fun getAllTransactionsInLastHrs(date: Date): Flow<List<TransactionWIthProductEntity>>
 
     @Insert(entity = TransactionEntity::class)
