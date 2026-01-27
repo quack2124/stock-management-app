@@ -1,8 +1,11 @@
+<!--Hardcoded categories should be replaced but it wasn't part of the assignment-->
+
 <resources>
     <string-array name="categories">
         <item>Electronics</item>
-        <item>Snacks</item>
+        <item>Food</item>
         <item>Car equipment</item>
-        <item>Drinks</item>
+        <item>Beverage</item>
+        <item>Miscellaneous</item>
     </string-array>
 </resources>

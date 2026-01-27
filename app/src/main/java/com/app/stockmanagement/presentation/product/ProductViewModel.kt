@@ -34,6 +34,7 @@ class ProductViewModel @Inject constructor(
                 override fun onSuccess(result: List<ProductWithSupplierEntity>) {
                     _uiState.value = _uiState.value.copy(
                         isLoading = false,
+                        cachedProducts = result.map { entity -> entity.toDomain() },
                         products = result.map { it.toDomain() })
                 }
 
@@ -59,5 +60,21 @@ class ProductViewModel @Inject constructor(
         }
     }
 
+    fun filterResults(category: String, viewId: Int) {
+        val filtered = if (category == ALL_ITEMS) {
+            _uiState.value.cachedProducts
 
+        } else {
+            _uiState.value.cachedProducts.filter { it.category == category }
+        }
+
+        _uiState.value = _uiState.value.copy(
+            products = filtered,
+            checkedElement = viewId
+        )
+    }
+
+    companion object {
+        const val ALL_ITEMS = "All Items"
+    }
 }

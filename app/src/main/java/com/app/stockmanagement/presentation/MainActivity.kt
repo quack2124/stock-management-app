@@ -3,6 +3,7 @@ package com.app.stockmanagement.presentation
 import android.content.Context
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.navigation.NavController
@@ -70,6 +71,16 @@ class MainActivity : AppCompatActivity() {
             menuInflater.inflate(R.menu.main_toolbar_menu, menu)
             val searchItem = binding.topAppBar.menu.findItem(R.id.action_search)
             val searchView = searchItem.actionView as SearchView
+            searchItem.setOnActionExpandListener(object : MenuItem.OnActionExpandListener {
+                override fun onMenuItemActionExpand(item: MenuItem): Boolean {
+                    return true
+                }
+
+                override fun onMenuItemActionCollapse(item: MenuItem): Boolean {
+                    invalidateMenu()
+                    return true
+                }
+            })
 
             searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {

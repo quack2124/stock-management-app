@@ -4,5 +4,7 @@ import com.app.stockmanagement.domain.model.ProductWithSupplier
 
 data class ProductUIState(
     val isLoading: Boolean = false,
-    val products: List<ProductWithSupplier> = emptyList()
+    val products: List<ProductWithSupplier> = emptyList(),
+    val cachedProducts: List<ProductWithSupplier> = emptyList(),
+    val checkedElement: Int = -1
 )
