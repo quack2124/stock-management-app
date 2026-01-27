@@ -2,13 +2,12 @@ package com.app.stockmanagement.presentation.transaction.transaction_management
 
 import android.graphics.Color
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.core.view.isVisible
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -40,9 +39,10 @@ class TransactionManagementFragment : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.typeAutocomplete.addTextChangedListener(formWatcher)
-        binding.productAutoComplete.addTextChangedListener(formWatcher)
-        binding.transactionQuantity.addTextChangedListener(formWatcher)
+        binding.typeAutocomplete.doAfterTextChanged { validateForm() }
+        binding.productAutoComplete.doAfterTextChanged { validateForm() }
+        binding.transactionQuantity.doAfterTextChanged { validateForm() }
+
         binding.topAppBar.menu.findItem(R.id.action_save)?.let { filterBtn ->
             filterBtn.isEnabled = false
 
@@ -130,26 +130,20 @@ class TransactionManagementFragment : DialogFragment() {
         return type.isNotEmpty() && products.isNotEmpty() && quantity.isNotEmpty()
     }
 
-    private val formWatcher = object : TextWatcher {
-        override fun afterTextChanged(s: Editable?) {
-            val quantity = binding.transactionQuantity.text?.toString()?.toIntOrNull() ?: -1
-            val isOverStock = binding.typeAutocomplete.text.toString() == Type.SALE.toString()
-                    && quantity > selectedProduct.currentStockLevel
+    private fun validateForm() {
+        val quantity = binding.transactionQuantity.text?.toString()?.toIntOrNull() ?: -1
+        val isOverStock = binding.typeAutocomplete.text.toString() == Type.SALE.toString()
+                && quantity > selectedProduct.currentStockLevel
 
-            with(binding) {
-                transactionQuantityLayout.error = if (isOverStock) {
-                    getString(R.string.error_max_quantity, selectedProduct.currentStockLevel)
-                } else {
-                    null
-                }
-
-                topAppBar.menu.findItem(R.id.action_save)?.isEnabled = !isOverStock && isFormValid()
+        with(binding) {
+            transactionQuantityLayout.error = if (isOverStock) {
+                getString(R.string.error_max_quantity, selectedProduct.currentStockLevel)
+            } else {
+                null
             }
 
+            topAppBar.menu.findItem(R.id.action_save)?.isEnabled = !isOverStock && isFormValid()
         }
-
-        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
     }
 
 }
