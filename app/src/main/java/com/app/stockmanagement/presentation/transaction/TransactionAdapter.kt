@@ -41,7 +41,7 @@ class TransactionAdapter(private var transactions: List<TransactionWithProduct>)
                 product.text = transaction.productName
                 date.text =
                     SimpleDateFormat("dd MMMM yyyy", Locale.getDefault()).format(transaction.date)
-                pricePerItem.text = "PPU $${transaction.productPrice.toInt()}"
+                pricePerItem.text = "Per unit $${transaction.productPrice.toInt()}"
                 quantity.text = "QTY ${transaction.quantity}"
                 type.text = "TYPE: ${transaction.type}"
                 productBarcode.text = "Barcode: ${transaction.productBarcode}"

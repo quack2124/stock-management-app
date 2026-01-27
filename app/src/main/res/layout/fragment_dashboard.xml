@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".presentation.dashboard.DashboardFragment">
 
-    <com.google.android.material.tabs.TabLayout
+
+<com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -58,6 +59,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.5" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

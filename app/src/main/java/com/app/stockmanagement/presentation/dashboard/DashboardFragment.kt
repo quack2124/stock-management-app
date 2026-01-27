@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.TooltipCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -64,16 +65,27 @@ class DashboardFragment : Fragment() {
             }
         }
 
-
+        binding.tabLayout.post {
+            val transactions = binding.tabLayout.getTabAt(0)
+            val stock = binding.tabLayout.getTabAt(1)
+            transactions?.view?.let { tabView ->
+                TooltipCompat.setTooltipText(tabView, "In last 24h")
+            }
+            stock?.view?.let { tabView ->
+                TooltipCompat.setTooltipText(tabView, "Less than 3 per item")
+            }
+        }
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: Tab) {
                 when (tab.position) {
                     0 -> {
+                        TooltipCompat.setTooltipText(tab.view, "In last 24h")
                         binding.lowStockList.isVisible = false
                         binding.recentTransactionList.isVisible = true
                     }
 
                     1 -> {
+                        TooltipCompat.setTooltipText(tab.view, "In last 24h")
                         binding.lowStockList.isVisible = true
                         binding.recentTransactionList.isVisible = false
                     }
