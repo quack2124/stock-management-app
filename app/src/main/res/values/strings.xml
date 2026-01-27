@@ -22,4 +22,5 @@
     <string name="quantity">Quantity</string>
     <string name="note">Note</string>
     <string name="filter">Filter</string>
+    <string name="error_max_quantity">Max quantity for sale is %1$d</string>
 </resources>

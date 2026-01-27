@@ -2,6 +2,8 @@ package com.app.stockmanagement.presentation.transaction.transaction_management
 
 import android.graphics.Color
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +15,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import com.app.stockmanagement.R
 import com.app.stockmanagement.data.local.entity.Type
 import com.app.stockmanagement.databinding.FragmentTransactionManagementBinding
 import com.app.stockmanagement.domain.model.ProductWithSupplier
@@ -37,6 +40,13 @@ class TransactionManagementFragment : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.typeAutocomplete.addTextChangedListener(formWatcher)
+        binding.productAutoComplete.addTextChangedListener(formWatcher)
+        binding.transactionQuantity.addTextChangedListener(formWatcher)
+        binding.topAppBar.menu.findItem(R.id.action_save)?.let { filterBtn ->
+            filterBtn.isEnabled = false
+
+        }
 
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -104,7 +114,6 @@ class TransactionManagementFragment : DialogFragment() {
         binding.productAutoComplete.setOnItemClickListener { parent, _, position, _ ->
             selectedProduct = parent.getItemAtPosition(position) as ProductWithSupplier
         }
-
         return binding.root
     }
 
@@ -112,4 +121,35 @@ class TransactionManagementFragment : DialogFragment() {
         super.onDestroyView()
         _binding = null
     }
+
+    private fun isFormValid(): Boolean {
+        val type = binding.typeAutocomplete.text.toString().trim()
+        val products = binding.productAutoComplete.text.toString().trim()
+        val quantity = binding.transactionQuantity.text.toString().trim()
+
+        return type.isNotEmpty() && products.isNotEmpty() && quantity.isNotEmpty()
+    }
+
+    private val formWatcher = object : TextWatcher {
+        override fun afterTextChanged(s: Editable?) {
+            val quantity = binding.transactionQuantity.text?.toString()?.toIntOrNull() ?: -1
+            val isOverStock = binding.typeAutocomplete.text.toString() == Type.SALE.toString()
+                    && quantity > selectedProduct.currentStockLevel
+
+            with(binding) {
+                transactionQuantityLayout.error = if (isOverStock) {
+                    getString(R.string.error_max_quantity, selectedProduct.currentStockLevel)
+                } else {
+                    null
+                }
+
+                topAppBar.menu.findItem(R.id.action_save)?.isEnabled = !isOverStock && isFormValid()
+            }
+
+        }
+
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+    }
+
 }
