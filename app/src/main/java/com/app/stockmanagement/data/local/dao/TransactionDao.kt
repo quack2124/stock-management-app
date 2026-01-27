@@ -14,7 +14,7 @@ import java.util.Date
 interface TransactionDao {
 
     @Transaction
-    @Query("SELECT * FROM transactions")
+    @Query("SELECT * FROM transactions ORDER BY date DESC")
     fun getAllTransactionsWithProduct(): Flow<List<TransactionWIthProductEntity>>
 
     @Transaction
