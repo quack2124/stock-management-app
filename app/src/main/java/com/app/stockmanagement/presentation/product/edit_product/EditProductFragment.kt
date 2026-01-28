@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.DialogFragment
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -14,12 +14,16 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.app.stockmanagement.databinding.FragmentEditProductBinding
 import com.app.stockmanagement.domain.model.ProductWithSupplier
+import com.app.stockmanagement.presentation.BaseCameraFragment
+import com.app.stockmanagement.util.Constants.ERROR
+import com.app.stockmanagement.util.UseCaseHandler
 import com.google.android.material.snackbar.Snackbar
+import com.google.mlkit.vision.barcode.common.Barcode
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class EditProductFragment : DialogFragment() {
+class EditProductFragment : BaseCameraFragment() {
     private var _binding: FragmentEditProductBinding? = null
     private val binding get() = _binding!!
     private val viewModel: EditProductViewModel by viewModels()
@@ -35,6 +39,25 @@ class EditProductFragment : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         product = args.currentProduct
+
+        binding.btnCloseCamera.setOnClickListener { stopCamera() }
+
+        binding.productForm.barcodeLayout.setEndIconOnClickListener {
+            binding.cameraContainer.isVisible = true
+            binding.previewView.controller = cameraController
+            checkForPermissionAndScanBarCode(callback = object : UseCaseHandler<Barcode> {
+                override fun onSuccess(result: Barcode) {
+                    binding.productForm.barcode.setText(result.displayValue)
+                    stopCamera()
+                }
+
+                override fun onFailure() {
+                    Snackbar.make(
+                        binding.root, ERROR, Snackbar.LENGTH_LONG
+                    ).setBackgroundTint(Color.RED).show()
+                }
+            })
+        }
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -87,6 +110,12 @@ class EditProductFragment : DialogFragment() {
         }
 
         return root
+    }
+
+    private fun stopCamera() {
+        cameraController.unbind()
+        binding.cameraContainer.isVisible = false
+        binding.previewView.controller = null
     }
 
     override fun onDestroyView() {

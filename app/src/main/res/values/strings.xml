@@ -32,4 +32,15 @@
     <string name="min_stock_level">Min stock level</string>
     <string name="recent_transactions">Recent transactions</string>
     <string name="low_stock">Low stock</string>
+    <string name="permission_required">Permission Required</string>
+    <string name="perimssion_requred_body">You have permanently denied camera access. Please enable it in the app settings to use the scanner.</string>
+    <string name="camera_permission_needed">Camera Permission Needed</string>
+    <string name="camera_permission_needed_body">Scanning barcodes requires camera access to automatically fill in product details.</string>
+    <string name="cancel">Cancel</string>
+    <string name="settings">Settings</string>
+    <string name="allow">Allow</string>
+    <string name="barcode_scanned">Barcode Scanned!</string>
+    <string name="camera_permission_is_required_to_scan">Camera permission is required to scan.</string>
+    <string name="can_t_be_lower_than_minimum_stock">Can\'t be lower than minimum stock</string>
+    <string name="close">Close</string>
 </resources>
