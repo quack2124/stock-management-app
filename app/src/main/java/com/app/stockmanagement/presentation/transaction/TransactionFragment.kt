@@ -39,7 +39,6 @@ import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-private const val s = "TransactionReport.pdf"
 
 @AndroidEntryPoint
 class TransactionFragment : Fragment() {
