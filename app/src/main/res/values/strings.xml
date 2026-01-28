@@ -50,4 +50,6 @@
     <string name="item_name">Item Name</string>
     <string name="add_supplier">Add supplier</string>
     <string name="stock_management_app">Stock Management App</string>
+    <string name="please_check_stock_singular">Please check stock, %1$d item is low on stock</string>
+    <string name="please_check_stock_plural">Please check stock, %1$d  items are low on stock</string>
 </resources>

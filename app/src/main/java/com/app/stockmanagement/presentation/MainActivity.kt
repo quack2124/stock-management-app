@@ -6,6 +6,9 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -15,8 +18,12 @@ import com.app.stockmanagement.R
 import com.app.stockmanagement.databinding.ActivityMainBinding
 import com.app.stockmanagement.util.Constants
 import com.app.stockmanagement.util.Constants.SEARCH_QUERY
+import com.app.stockmanagement.util.UiStockEventManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -24,7 +31,18 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     private var showOptionsMenu = false
+    @Inject
+    lateinit var uiEventManager: UiStockEventManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                uiEventManager.events.collect { message ->
+                    Snackbar.make(binding.root, message, Snackbar.LENGTH_LONG).show()
+                }
+            }
+        }
+
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -101,4 +119,5 @@ class MainActivity : AppCompatActivity() {
         }
         return true
     }
+
 }

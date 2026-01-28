@@ -1,5 +1,6 @@
 package com.app.stockmanagement.presentation.dashboard
 
+import androidx.work.WorkManager
 import com.app.stockmanagement.data.local.entity.ProductEntity
 import com.app.stockmanagement.data.local.entity.ProductWithSupplierEntity
 import com.app.stockmanagement.data.local.entity.SupplierEntity
@@ -35,6 +36,7 @@ class DashboardViewModelTest {
 
     private val transactionRepository: TransactionRepository = mockk()
     private val productRepository: ProductRepository = mockk()
+    private val worker: WorkManager = mockk()
     private lateinit var viewModel: DashboardViewModel
     private val testScheduler = TestCoroutineScheduler()
     private val testDispatcher = StandardTestDispatcher(testScheduler)
@@ -42,10 +44,16 @@ class DashboardViewModelTest {
 
     @Before
     fun setup() {
+        // mock dispatchers in order to get all flow results
         Dispatchers.setMain(testDispatcher)
         mockkStatic(Dispatchers::class)
         every { Dispatchers.IO } returns testDispatcher
-        viewModel = DashboardViewModel(transactionRepository, productRepository)
+        // fix for worker manager inside init block
+        every {
+            worker.enqueueUniquePeriodicWork(any(), any(), any())
+        } returns mockk()
+        every { worker.cancelAllWork() } returns mockk()
+        viewModel = DashboardViewModel(transactionRepository, productRepository, worker)
     }
 
     @After
@@ -56,10 +64,10 @@ class DashboardViewModelTest {
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
-    fun `getLowStockProducts should update state to success after loading`() = runTest {
-        // 1. Prepare Mock Data
+    fun `getLowStockProducts should update state accordingly`() = runTest {
+        //GIVEN
+
         mockkStatic(Dispatchers::class)
-        // Force Dispatchers.IO to return our UnconfinedTestDispatcher
         every { Dispatchers.IO } returns UnconfinedTestDispatcher(testScheduler)
         val mockProductsWithSupplierEntity = listOf(
             ProductWithSupplierEntity(
@@ -94,13 +102,15 @@ class DashboardViewModelTest {
 
         val states = mutableListOf<DashboardFragmentUiState>()
 
-        // 2. Start collecting the StateFlow in the background
         backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) {
             viewModel.uiState.collect { states.add(it) }
         }
 
+        //WHEN
         viewModel.getLowStockProducts()
         advanceUntilIdle()
+
+        //THEN
         assertEquals(3, states.size)
         assertTrue(states[1].isLoading)
         assertFalse(states[2].isLoading)
