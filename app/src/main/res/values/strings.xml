@@ -43,4 +43,9 @@
     <string name="camera_permission_is_required_to_scan">Camera permission is required to scan.</string>
     <string name="can_t_be_lower_than_minimum_stock">Can\'t be lower than minimum stock</string>
     <string name="close">Close</string>
+    <string name="export">Export</string>
+    <string name="all_transactions">All Transactions</string>
+    <string name="qty">Qty</string>
+    <string name="date">Date</string>
+    <string name="item_name">Item Name</string>
 </resources>

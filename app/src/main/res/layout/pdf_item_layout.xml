@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingLeft="24dp"
+    android:paddingRight="24dp"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp">
+
+    <TextView
+        android:id="@+id/pdfItemName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:text="@string/item_name"
+        android:textSize="6sp" />
+
+    <TextView
+        android:id="@+id/pdfBarcode"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.5"
+        android:text="@string/barcode"
+        android:textSize="6sp" />
+
+    <TextView
+        android:id="@+id/pdfQty"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.8"
+        android:gravity="end"
+        android:text="@string/qty"
+        android:textSize="6sp" />
+
+    <TextView
+        android:id="@+id/pdfPricePerUnit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.2"
+        android:gravity="end"
+        android:text="@string/price"
+        android:textSize="6sp" />
+
+    <TextView
+        android:id="@+id/pdfDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.5"
+        android:gravity="end"
+        android:text="@string/date"
+        android:textSize="6sp" />
+</LinearLayout>
