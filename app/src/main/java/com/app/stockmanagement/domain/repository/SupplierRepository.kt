@@ -11,4 +11,6 @@ interface SupplierRepository {
 
     suspend fun updateSupplier(supplier: Supplier)
 
+    suspend fun addSupplier(supplier: Supplier)
+
 }

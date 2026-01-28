@@ -1,6 +1,7 @@
 package com.app.stockmanagement.data.local.dao
 
 import androidx.room.Dao
+import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 import com.app.stockmanagement.data.local.entity.SupplierEntity
@@ -18,5 +19,8 @@ interface SupplierDao {
 
     @Update(entity = SupplierEntity::class)
     suspend fun updateSupplier(supplier: Supplier)
+
+    @Insert(entity = SupplierEntity::class)
+    suspend fun addSupplier(supplier: Supplier)
 
 }

@@ -58,16 +58,19 @@
 
     <dialog
         android:id="@+id/navigation_edit_supplier"
-        android:name="com.app.stockmanagement.presentation.supplier.edit_supplier.EditSupplierFragment"
-        android:label="a">
+        android:name="com.app.stockmanagement.presentation.supplier.edit_supplier.EditSupplierFragment">
         <argument
             android:name="currentSupplier"
             app:argType="com.app.stockmanagement.domain.model.Supplier" />
     </dialog>
 
     <dialog
+        android:id="@+id/navigation_add_supplier"
+        android:name="com.app.stockmanagement.presentation.supplier.add_supplier.AddSupplierFragment" />
+
+
+    <dialog
         android:id="@+id/navigation_transaction_management"
-        android:name="com.app.stockmanagement.presentation.transaction.transaction_management.TransactionManagementFragment"
-        android:label="a"></dialog>
+        android:name="com.app.stockmanagement.presentation.transaction.transaction_management.TransactionManagementFragment" />
 
 </navigation>

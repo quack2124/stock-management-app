@@ -13,6 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.app.stockmanagement.R
 import com.app.stockmanagement.databinding.FragmentSupplierBinding
 import com.app.stockmanagement.util.Constants.SEARCH_QUERY
 import com.google.android.material.snackbar.Snackbar
@@ -29,6 +30,10 @@ class SupplierFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observeSearch()
+
+        binding.fabAddSupplier.setOnClickListener {
+            findNavController().navigate(R.id.navigation_add_supplier)
+        }
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {

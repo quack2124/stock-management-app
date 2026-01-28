@@ -20,7 +20,7 @@
             android:layout_height="?attr/actionBarSize"
             app:menu="@menu/toolabar_save_menu"
             app:navigationIcon="@drawable/ic_close_24dp"
-            app:title="@string/edit_supplier" />
+            app:title="@string/add_supplier" />
     </com.google.android.material.appbar.AppBarLayout>
 
 

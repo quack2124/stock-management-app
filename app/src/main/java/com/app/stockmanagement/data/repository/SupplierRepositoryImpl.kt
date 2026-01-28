@@ -13,4 +13,6 @@ class SupplierRepositoryImpl @Inject constructor(
     override fun searchForSupplierByName(name: String) = supplierDao.searchForSupplierByName(name)
 
     override suspend fun updateSupplier(supplier: Supplier) = supplierDao.updateSupplier(supplier)
+
+    override suspend fun addSupplier(supplier: Supplier) = supplierDao.addSupplier(supplier)
 }
