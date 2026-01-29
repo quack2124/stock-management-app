@@ -7,12 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.EditText
-import android.widget.Toast
-
-import androidx.camera.mlkit.vision.MlKitAnalyzer
-import androidx.camera.view.CameraController
-import androidx.camera.view.LifecycleCameraController
-import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
@@ -28,8 +22,6 @@ import com.app.stockmanagement.presentation.BaseCameraFragment
 import com.app.stockmanagement.util.Constants.ERROR
 import com.app.stockmanagement.util.UseCaseHandler
 import com.google.android.material.snackbar.Snackbar
-import com.google.mlkit.vision.barcode.BarcodeScannerOptions
-import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.barcode.common.Barcode
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -172,43 +164,6 @@ class AddProductFragment : BaseCameraFragment() {
             currentStockLevelLayout.error = null
 
         }
-    }
-
-    private fun startCamera() {
-        val context = requireContext()
-        cameraController = LifecycleCameraController(context)
-
-        val options = BarcodeScannerOptions.Builder()
-            .setBarcodeFormats(
-                Barcode.FORMAT_EAN_13,
-            )
-            .build()
-        val barcodeScanner = BarcodeScanning.getClient(options)
-        binding.btnCloseCamera.setOnClickListener {
-            stopCamera()
-        }
-        cameraController.setImageAnalysisAnalyzer(
-            ContextCompat.getMainExecutor(context),
-            MlKitAnalyzer(
-                listOf(barcodeScanner),
-                CameraController.IMAGE_ANALYSIS,
-                ContextCompat.getMainExecutor(context)
-            ) { result ->
-                val barcodeResults = result.getValue(barcodeScanner)
-                if (!barcodeResults.isNullOrEmpty()) {
-                    val barcode = barcodeResults[0]
-
-                    binding.productForm.barcode.setText(barcode.displayValue)
-                    stopCamera()
-
-                    Toast.makeText(context, "Barcode Scanned!", Toast.LENGTH_SHORT).show()
-                }
-            }
-        )
-
-        cameraController.bindToLifecycle(viewLifecycleOwner)
-        binding.previewView.controller = cameraController
-        binding.cameraContainer.isVisible = true
     }
 
     private fun stopCamera() {

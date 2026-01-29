@@ -6,12 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.app.stockmanagement.R
 import com.app.stockmanagement.databinding.FragmentEditProductBinding
 import com.app.stockmanagement.domain.model.ProductWithSupplier
 import com.app.stockmanagement.presentation.BaseCameraFragment
@@ -40,6 +42,14 @@ class EditProductFragment : BaseCameraFragment() {
         super.onViewCreated(view, savedInstanceState)
         product = args.currentProduct
 
+        with(binding.productForm) {
+            listOf(currentStockLevel, minStockLevel).map { editText ->
+                editText.doAfterTextChanged {
+                    if (editText == binding.productForm.currentStockLevel || editText == binding.productForm.minStockLevel)
+                        validateStockFields()
+                }
+            }
+        }
         binding.btnCloseCamera.setOnClickListener { stopCamera() }
 
         binding.productForm.barcodeLayout.setEndIconOnClickListener {
@@ -121,5 +131,18 @@ class EditProductFragment : BaseCameraFragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun validateStockFields() = with(binding.productForm) {
+        val currentStockLevelValue = currentStockLevel.text.toString().toIntOrNull() ?: -1
+        val minStockLevelValue = minStockLevel.text.toString().toIntOrNull() ?: -1
+        if (currentStockLevelValue != -1 && currentStockLevelValue < minStockLevelValue) {
+            currentStockLevelLayout.error = getString(R.string.can_t_be_lower_than_minimum_stock)
+            binding.topAppBar.menu.findItem(R.id.action_save)?.isEnabled = false
+        } else {
+            currentStockLevelLayout.error = null
+            binding.topAppBar.menu.findItem(R.id.action_save)?.isEnabled = true
+
+        }
     }
 }
