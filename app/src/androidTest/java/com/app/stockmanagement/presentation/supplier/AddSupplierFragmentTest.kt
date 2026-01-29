@@ -15,7 +15,7 @@ import org.junit.Test
 class AddSupplierFragmentTest {
 
     @Test
-    fun addSupplierFormShouldValidateInput() {
+    fun givenInvalidOrValidFormDataSaveBtnShouldBeEnabledOrDisabled() {
         launchFragmentInHiltContainer<AddSupplierFragment>()
 
         onView(withId(R.id.name)).perform(
